@@ -1,0 +1,21 @@
+# Generated .NET / Unreal files
+**/bin/
+**/obj/
+/Binaries/
+/Intermediate/
+/DerivedDataCache/
+/Saved/
+/Build/
+/Output/
+.vs/
+.idea/
+*.user
+*.suo
+*.pdb
+*.log
+# Supply these build prerequisites locally; never bundle SDK or engine tools.
+/Dependencies/Client/*
+!/Dependencies/Client/README.md
+/Tools/retoc/*
+!/Tools/retoc/README.md
+# dist is intentionally tracked: complete installable mod.

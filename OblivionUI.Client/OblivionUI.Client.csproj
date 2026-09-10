@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <SdkDirectory Condition="'$(SdkDirectory)' == ''">$(MSBuildThisFileDirectory)..\Dependencies\Client</SdkDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="BookNative.tsv" />
+    
+    <ProjectReference Include="../OblivionUI.Api/OblivionUI.Api.csproj" />
+    <Reference Include="$(SdkDirectory)/OblivionMp.Sdk.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/OblivionMpCSharpMod.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/ReadyM.Sdk.Common.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/ReadyM.Modloader.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/ReadyM.Api.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/ReadyM.Api.Multiplayer.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/ReadyM.Relay.Common.Oblivion.dll"><Private>false</Private></Reference>
+    <Reference Include="$(SdkDirectory)/Friflo.Engine.ECS.dll"><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>
+

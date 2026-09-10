@@ -1,0 +1,13 @@
+{
+  "uniqueId": "OblivionUI",
+  "version": "0.3.2",
+  "name": "Oblivion UI",
+  "author": "QueenlyDonkey",
+  "description": "Oblivion-style prompts, sliding parchment notifications and customizable interactive books with shared client APIs.",
+  "dependencies": [
+    {
+      "uniqueId": "OblivionMP.SDK",
+      "minimumVersion": "0.2.0"
+    }
+  ]
+}
