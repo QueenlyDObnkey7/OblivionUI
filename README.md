@@ -2,7 +2,7 @@
 
 Reusable Oblivion-style UI for **Oblivion Remastered multiplayer (OBMP)**: interaction prompts, sliding torn-paper notifications and customizable parchment book menus.
 
-Version **0.3.2**. Assets target **Unreal Engine 5.3.2**; managed projects target **.NET 10**. Requires **OblivionMP.SDK 0.2.0 or newer**, with a compatible OBMP client and its UE4SS reflection exports. Compatibility with other game/SDK versions is not guaranteed.
+Version **0.9.4**. Assets target **Unreal Engine 5.3.2**; managed projects target **.NET 10**. Requires **OblivionMP.SDK 0.2.0 or newer**, with a compatible OBMP client and its UE4SS reflection exports. Compatibility with other game/SDK versions is not guaranteed.
 
 ## Install the ready-built mod
 
@@ -24,7 +24,19 @@ mods/OblivionUI/
 
 The `.pak`, `.utoc` and `.ucas` form one asset package. Upload the complete mod directory, not only the pak. There is no OblivionUI server DLL. Gameplay decisions belong to the consuming mod's server.
 
-In-game demonstrations: **Alt+B** opens the book with example controls; **Alt+N** previews left then right notifications. Close the book with its Close button.
+In-game demonstrations: **Alt+U** opens the book with example controls; **Alt+N** previews left then right notifications. Close the book with its Close button.
+
+
+## Current API guides
+
+Version 0.9.4 adds expanded book controls, side panels, crafting previews, popups, images and drawing, speaker indicators, styled HUD panels, and UI performance diagnostics.
+
+- [Book menus and layouts](docs/BOOK-API.md)
+- [Crafting previews](docs/CRAFTING-API.md)
+- [Popups, images and drawing](docs/POPUP-ART-API.md)
+- [Speaker indicators](docs/SPEAKER-API.md)
+- [UI toolkit](docs/TOOLKIT-API.md)
+- [Performance changes and limitations](docs/PERFORMANCE-NOTES.md)
 
 ## Use the API in another mod
 
@@ -42,7 +54,7 @@ Add a client-side reference to `OblivionUI.Api.dll`. The installed OblivionUI mo
 Replace the example path with your actual location. Add this object to the `dependencies` array in your mod's manifest, preserving existing dependencies:
 
 ```json
-{ "uniqueId": "OblivionUI", "minimumVersion": "0.3.2" }
+{ "uniqueId": "OblivionUI", "minimumVersion": "0.9.4" }
 ```
 
 All public API types below use `using OblivionUI;`. Call them from your client mod after startup. `Hud.IsReady` indicates the managed renderer has started; it does not prove that a visible frame has rendered. `Books.IsAvailable` becomes true after the native book opens successfully; do not use it to block the first call to `Books.Open`.
@@ -154,7 +166,7 @@ Each `BookPage` supports its own `Title`, `Subtitle`, `Layout`, `Gap`, and `Elem
 | `BookLayout.TwoColumns` | Places controls in two automatically sized columns |
 | `BookLayout.Custom` | Uses each element's `X`, `Y`, `Width`, `Height` |
 
-Coordinates use a **630-unit-wide** content area; the book scales with the viewport. Default element width is 610, height 128, and page gap 16. Use at least 118 height for interactive rows to fit the native controls. Text and headings can be shorter. Custom rectangles must satisfy `X >= 0`, `Y >= 0`, `X + Width <= 630`, positive width, height 32–2000 and `Y <= 20000`. Page gap must be 0–100. Numeric values must be finite.
+Coordinates use a **630-unit-wide** content area; the book scales with the viewport. Default element width is 610, height 128, and page gap 16. Use at least 118 height for interactive rows to fit the native controls. Text and headings can be shorter. Custom rectangles must satisfy `X >= 0`, `Y >= 0`, `X + Width <= 630`, positive width, height 32ï¿½2000 and `Y <= 20000`. Page gap must be 0ï¿½100. Numeric values must be finite.
 
 Content, pages, controls, callbacks, geometry and visibility are customizable through C#. Fonts, paper, colours, native widget styling and the outer book frame are Unreal assets; changing those requires asset editing and a rebuild. This API has no per-book theme/texture parameter.
 
@@ -173,7 +185,7 @@ book.Dispose();
 
 `BookDefinition.OnClose` is an optional callback invoked when the native runtime closes a rendered book. `Dispose()` requests closure on the next UI update; `IsOpen` reports that closure has not been requested, not whether a native frame is currently visible. Do not rely solely on `OnClose` for cleaning up a book that was never rendered. Keep and dispose your handles when your mod unloads.
 
-A definition must contain **1–32 pages**, with **0–128 elements per page**. Dropdowns need 1–128 non-null options and a valid selected index. Slider minimum must be below maximum, step positive, and initial value within range. Invalid definitions throw before replacing the current book.
+A definition must contain **1ï¿½32 pages**, with **0ï¿½128 elements per page**. Dropdowns need 1ï¿½128 non-null options and a valid selected index. Slider minimum must be below maximum, step positive, and initial value within range. Invalid definitions throw before replacing the current book.
 
 ## Integration and compatibility
 

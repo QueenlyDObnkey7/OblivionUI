@@ -35,7 +35,7 @@ The included BookNative.tsv is part of the C# client as an embedded resource and
 
 1. Run managed tests and build examples.
 2. Run the full build after asset changes; it verifies pak and IoStore integrity.
-3. In a compatible OBMP client, verify Alt+B, every control type, paging, scrolling, close/input restoration, and Alt+N for both notification sides.
+3. In a compatible OBMP client, verify Alt+U, every control type, paging, scrolling, close/input restoration, and Alt+N for both notification sides.
 4. Verify the consuming mod's gameplay/network behavior separately.
 5. Copy the reviewed Output/mods/OblivionUI directory into dist/mods/OblivionUI for the next release. Keep the manifest and all five client files from the same build.
 

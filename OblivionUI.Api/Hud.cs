@@ -44,6 +44,13 @@ internal sealed class NotificationQueue
         public readonly string Title = title, Body = body;
         public readonly NotificationSide Side = side;
         public readonly double Duration = duration;
+        private double _offset=double.NaN;
+        private string _packet="";
+        public string Packet(double offset)
+        {
+            if(offset!=_offset){_offset=offset;_packet=FormattableString.Invariant($"@oui|{offset:F1}|{Title}|{Body}");}
+            return _packet;
+        }
         public volatile bool Cancelled;
         public void Dispose() => Cancelled = true;
     }
@@ -65,7 +72,7 @@ internal sealed class NotificationQueue
         double t = age < .32 ? 1-age/.32 : age > item.Duration+.32 ? (age-item.Duration-.32)/.32 : 0;
         t=Math.Clamp(t,0,1); t=t*t*(3-2*t);
         double offset=380*t*(item.Side==NotificationSide.Left?-1:1);
-        string packet=FormattableString.Invariant($"@oui|{offset:F1}|{item.Title}|{item.Body}");
+        string packet=item.Packet(offset);
         return item.Side==NotificationSide.Left ? (packet,"") : ("",packet);
     }
     internal void Clear() { _waiting.Clear(); _active=null; }

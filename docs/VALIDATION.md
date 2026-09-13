@@ -1,11 +1,9 @@
-# Export validation — September 10, 2026
+# Export validation â€” September 13, 2026
 
-- Standalone API/client build with .NET 10 and explicitly supplied matching local OBMP SDK references: zero warnings and errors.
-- All 37 managed notification/book API checks pass from this folder.
-- Both example source files compile against the shared API: zero warnings and errors.
-- All five prebuilt client files match the existing OblivionUI 0.3.2 release (SHA-256 comparisons).
-- UnrealPak -Test completed successfully; retoc verify reported verified for the included IoStore container.
-- Upload text was scanned for local user-home paths and common credential patterns; none remained. Engine-local Android file-server settings were omitted.
-- Build artifacts are kept outside the upload folder after validation and ignored for future builds.
+- Version 0.9.4 managed API/client and examples build successfully with .NET 10 and matching local OBMP SDK references: zero warnings and errors.
+- All 1,364 managed UI checks and the transparent-button native metadata check pass from this repository.
+- The five prebuilt client files and manifest were copied from the current local server deployment. SHA256SUMS.txt records the exported package hashes.
+- UnrealPak integrity testing and retoc IoStore verification pass for the exported assets.
+- Official SDK dependencies, local caches, server state, and unrelated gameplay mod assets are excluded.
 
-The Unreal editor project was not fully recooked as part of this source export. The included prebuilt widgets are the existing release assets. These export checks do not constitute a new in-game test or establish compatibility with another game/SDK version.
+The Unreal editor project was not recooked for this export. Prebuilt widgets are the current deployed assets. These checks are not a new in-game test and do not establish FPS gains or compatibility with another game/SDK version. See PERFORMANCE-NOTES.md for the scope and limitations of the optimization work.

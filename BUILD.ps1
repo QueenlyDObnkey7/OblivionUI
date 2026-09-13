@@ -43,7 +43,7 @@ $lines = $files | ForEach-Object {
     '"' + $_.FullName + '" "../../../OblivionRemastered/Content/' + $relative + '"'
 }
 $marker = Join-Path $PSScriptRoot 'Output/package.txt'
-'OblivionUI 0.3.2 - Unreal Engine 5.3.2' | Set-Content $marker
+'OblivionUI 0.9.4 - Unreal Engine 5.3.2' | Set-Content $marker
 $lines += '"' + $marker + '" "../../../OblivionRemastered/Content/OblivionUI/package.txt"'
 $lines | Set-Content $response -Encoding utf8
 $pak = Join-Path $PSScriptRoot 'Output/OblivionUI-legacy.pak'

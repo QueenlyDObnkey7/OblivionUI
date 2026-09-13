@@ -230,6 +230,9 @@ static void MakeAdapterFunction(UWidgetBlueprint* BP, FName Name, FName Target, 
 
 int32 UBuildInteractionUICommandlet::Main(const FString& Params)
 {
+    if(Params.Contains(TEXT("VoiceChecks"))) { extern int32 VoiceChecks(); return VoiceChecks(); }
+    if(Params.Contains(TEXT("VoiceBuild"))) { extern int32 BuildVoiceUI(); return BuildVoiceUI(); }
+    if(Params.Contains(TEXT("OrnateBar"))) { extern int32 BuildOrnateBar(); return BuildOrnateBar(); }
     if(Params.Contains(TEXT("BookBuild"))) { extern int32 BuildBookUI(); return BuildBookUI(); }
     if(Params.Contains(TEXT("BookMetadata"))) { extern int32 BookMetadata(); return BookMetadata(); }
     if(Params.Contains(TEXT("BookPreview"))) { extern int32 PreviewBookUI(); return PreviewBookUI(); }
@@ -339,12 +342,18 @@ int32 UBuildInteractionUICommandlet::Main(const FString& Params)
     LabelSlot->SetPadding(FMargin(9,0,0,0)); LabelSlot->SetVerticalAlignment(VAlign_Center);
     if (Adapter)
     {
-        for(const FString Name : {FString(TEXT("Book")),FString(TEXT("BookControl"))}) {
+        for(const FString Name : {FString(TEXT("Book")),FString(TEXT("BookLeft")),FString(TEXT("BookRight")),FString(TEXT("BookPopup")),FString(TEXT("BookControl")),FString(TEXT("Tooltip")),FString(TEXT("HudPanel"))}) {
             FString ClassPath=TEXT("/Game/OblivionUI/Book/WBP_")+Name+TEXT(".WBP_")+Name+TEXT("_C");
             if(auto BookClass=LoadClass<UUserWidget>(nullptr,*ClassPath)) {
                 FEdGraphPinType ClassType; ClassType.PinCategory=UEdGraphSchema_K2::PC_Class; ClassType.PinSubCategoryObject=UUserWidget::StaticClass();
                 FBlueprintEditorUtils::AddMemberVariable(BP,FName(*(Name+TEXT("Class"))),ClassType,BookClass->GetPathName());
             }
+        }
+        for(const FString Name : {FString(TEXT("VoiceOverlay")),FString(TEXT("SpeakerIcon"))}) {
+            FString ClassPath=TEXT("/Game/OblivionUI/Voice/WBP_")+Name+TEXT(".WBP_")+Name+TEXT("_C");
+            auto VoiceClass=LoadClass<UUserWidget>(nullptr,*ClassPath); check(VoiceClass);
+            FEdGraphPinType ClassType; ClassType.PinCategory=UEdGraphSchema_K2::PC_Class; ClassType.PinSubCategoryObject=UUserWidget::StaticClass();
+            FBlueprintEditorUtils::AddMemberVariable(BP,FName(*(Name+TEXT("Class"))),ClassType,VoiceClass->GetPathName());
         }
         auto Paper = MakePaper();
         for (const FString Side : { FString(TEXT("Left")), FString(TEXT("Right")) })
@@ -399,6 +408,3 @@ int32 UBuildInteractionUICommandlet::Main(const FString& Params)
     UE_LOG(LogTemp, Display, TEXT("OBLIVION_UI_BUILT %s; SetPrompt(KeyText,ActionText) compiled."), *Filename);
     return 0;
 }
-
-
-

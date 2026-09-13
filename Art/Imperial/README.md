@@ -1,0 +1,39 @@
+# Imperial image-based UI artwork
+
+These textures were created with the built-in image-generation tool for this project. Source PNGs are preserved here, including alpha. Unreal imports them into `/Game/OblivionUI/Book/T_Imperial*` and uses them as actual texture resources on the widgets. No generated image is referenced from the Codex cache at runtime.
+
+- `HudPaper.png`: compact parchment HUD and tooltip background. Its outer transparent padding is excluded by the widget's texture UV region; torn edges remain visible.
+- `EngravedFrame.png`: button, item-card, dropdown, text-field, slider and scrollbar artwork. Unreal uses nine-slice brushes and a 256-pixel texture size cap so high-resolution borders do not consume small controls. Normal, hover, pressed and disabled states tint the same artwork.
+- `PatinatedMetal.png`: textured progress fill and scrollbar channel.
+- `Vellum.png`: dropdown-menu background material.
+
+The existing book-cover/parchment illustration is retained. Widget code handles layout, input, clipping and animation; backgrounds and border detail come from images. User drawing canvases and the generic segmented-ring API retain their drawing functionality. The live arena rank view now uses the textured progress bar.
+
+## Generation prompts
+
+### Vellum
+Create one production-ready seamless UI material texture asset, not a mockup. An old Imperial ledger paper background for an Oblivion Remastered style dark realistic medieval RPG. Flat orthographic face-on rectangular aged grey-ivory vellum sheet, fills the entire image edge to edge, NO frame NO border NO objects NO text NO symbols. Photoreal fine paper fibres, slight hand-worked thickness and mottling, restrained pale desaturated warm-grey palette, quiet evenly lit center for legible dark text. Very subtle crease near one edge, tiny darker stains toward edges only, absolutely no burned orange or yellow cast, no artificial noise, no checkerboard. High-end scanned antique material realism. Wide landscape 3:2 composition. Save as material artwork for interface backgrounds.
+
+### Engraved frame
+One isolated game UI button texture asset for a realistic medieval Imperial manuscript interface, Oblivion Remastered mood. Wide flat straight-on 5:1 horizontal rectangular strip, genuinely transparent outside. Quiet pale grey ivory vellum center with actual fibrous aged paper texture. Narrow imperfect dark sepia engraved double-rule border, extremely restrained tarnished brass corner tips, no big ornaments. Slim, elegant, almost flush, not chunky, NO bevelled game fantasy frame, NO glow, NO text, NO symbols, NO shadows outside the object, NO checkerboard drawn into image. The strip fills the image closely with a small transparent margin. Top and bottom edges perfectly horizontal, sides vertical so it can be nine-sliced as a reusable button and item-card border. Scanned material realism rather than illustration; low contrast pale center ready for dark text. One single button, not an asset sheet or mockup.
+
+### HUD paper
+Create ONE production-ready blank HUD background image for a realistic medieval roleplaying game, in the understated visual language of Oblivion Remastered inventory parchment. A wide 2:1 landscape small fragment of ancient grey-ivory vellum, slightly irregular hand-cut edges with tiny nicks and visible thickness, fine real paper fibres, subtle creases, faded dark sepia thin parallel ink rules along the top and bottom only with a tiny restrained diamond ornament at the center of the top rule. The paper fills the composition with only a very small genuinely transparent margin around it. No background behind the paper, true alpha transparency, NO text, NO symbols except the tiny diamond, NO strong gold/orange, NO black slab, NO leather, NO glossy bevel, no dramatic lighting, no perspective. Flat orthographic scanned antique paper, quiet pale center ready for dark text, physically convincing subtle material detail, elegantly restrained.
+
+### Patinated metal
+A single seamless realistic material texture swatch for an understated medieval RPG interface: old dull pewter-bronze alloy, desaturated dark warm grey brass, extremely fine horizontal hairline wear, small natural patina mottles, subtle uneven hand-hammered metal grain. Flat evenly lit orthographic scan fills the entire image edge to edge. No objects, no frame, no text, no shapes, no symbols, no bright gold, no glitter, no dramatic highlights or shadows. Restrained realistic material similar to worn Oblivion Remastered inventory fittings. The texture will be used on tiny scrollbar thumbs and progress fills, so retain readable subtle grain without busy marks. Landscape 3:2.
+### Chevron
+One isolated small UI icon: a simple downward pointing shallow V chevron painted in dark sepia-brown ink with subtly worn dry-brush edges on a fully genuinely transparent background. Fits an antique manuscript menu in a realistic medieval RPG. Flat 2D. No paper, no border, no circle, no square, no shadow, no glow, no gold, no other symbols, no text. Centered single thick readable ink chevron fills about 75 percent of the width of a square canvas. This will be displayed at 14 pixels wide so keep it extremely simple and clearly recognizable.
+
+### Tick
+One isolated UI icon: a single dark sepia ink check mark, clear conventional tick with short descending left stroke and long rising right stroke, for an antique manuscript game menu. Genuinely transparent background. No paper, no border, no box, no circle, no other marks or text, no glow or drop shadow. Thick easily readable strokes with restrained ink texture and tiny worn edges, flat 2D. Center the check mark and fill approximately 80 percent of a square canvas. Must remain recognizable at 20 pixels.
+
+## Inventory tab atlas (0.8.2)
+Built-in image generation, saved as TabAtlas.png. A 3x3 transparent atlas consumed by UMG image UV regions. Cells: weapons, armour, spells, book, voice, settings, items, selected bookmark, arrow. Source alpha is retained.
+
+Prompt: Create ONE production UI sprite atlas for an Oblivion Remastered inspired parchment inventory menu. Transparent background, no paper behind icons. Exact regular grid of 3 columns and 3 rows, square canvas. Each of nine cells contains one centered isolated asset, generous 15% margin within each cell, no overlap, no labels or lettering. Reading row-major: 1 ornate medieval sword with subtle curling engraved flourish, 2 medieval shield with heraldic motif, 3 magical spell hand with small curling flame, 4 medieval quill and ledger book, 5 voice/speaking emblem using a human profile and three small breath lines, 6 interlocking medieval cogwheels, 7 small stitched pouch, 8 pointed-down bookmark selection backing made of translucent smoky brown aged vellum with soft sides and a definite tiny point at bottom (no icon), 9 small ornate left-pointing triangular navigation arrow. Icons use thin but legible faded reddish umber engraved ink linework, like historical copperplate illustrations printed on parchment. Flat straight-on 2D UI sprites, monochrome umber, fine handmade irregularities, elegant restrained Elder Scrolls inventory aesthetic. No 3D lighting, no gold frames, no modern app symbols, no checkerboard. Actual alpha transparency. This is an atlas used with UV regions, so exact equal grid placement is essential.
+
+## Native inventory skin (0.8.4)
+Tabbed menus now reference the installed game's T_UI_PlayerMenu_Background, T_Tab_1, and T_Category_* textures at runtime. These native assets are not copied into the mod package. TabImagePath and PaperImagePath remain available for custom artwork. The older generated atlas remains for compatibility with existing cooked widgets.
+
+Local Inspection/NativeTabs PNGs are lossless BC3 decodes used only to check the Unreal preview. They are not replacement artwork or shipped resources.

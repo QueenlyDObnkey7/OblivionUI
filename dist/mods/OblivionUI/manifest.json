@@ -1,9 +1,9 @@
 {
   "uniqueId": "OblivionUI",
-  "version": "0.3.2",
+  "version": "0.9.4",
   "name": "Oblivion UI",
   "author": "QueenlyDonkey",
-  "description": "Oblivion-style prompts, sliding parchment notifications and customizable interactive books with shared client APIs.",
+  "description": "Image-based Imperial parchment HUDs, textured controls, interactive books and shared UI APIs.",
   "dependencies": [
     {
       "uniqueId": "OblivionMP.SDK",

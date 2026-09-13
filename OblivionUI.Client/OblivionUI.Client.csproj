@@ -3,10 +3,12 @@
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <SdkDirectory Condition="'$(SdkDirectory)' == ''">$(MSBuildThisFileDirectory)..\Dependencies\Client</SdkDirectory>
   </PropertyGroup>
   <ItemGroup>
     <EmbeddedResource Include="BookNative.tsv" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="10.0.8" ExcludeAssets="runtime" />
     
     <ProjectReference Include="../OblivionUI.Api/OblivionUI.Api.csproj" />
     <Reference Include="$(SdkDirectory)/OblivionMp.Sdk.dll"><Private>false</Private></Reference>
