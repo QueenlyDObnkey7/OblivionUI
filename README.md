@@ -210,6 +210,7 @@ Examples/                  Compilable consuming-mod examples
 Dependencies/Client/       Instructions for external SDK references
 Tools/retoc/               Instructions for asset packaging prerequisite
 BUILD.ps1                  Managed / complete asset build
+GET-DEPENDENCIES.ps1       Fetches SDK DLLs from a server release
 OblivionRemastered.uproject Unreal 5.3 project
 manifest.json              Mod metadata
 dist/mods/OblivionUI/      Ready-built installable package

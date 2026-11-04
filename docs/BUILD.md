@@ -3,7 +3,7 @@
 ## Prerequisites
 
 - Windows with .NET 10 SDK for C# builds.
-- A matching OBMP client SDK. See ../Dependencies/Client/README.md for the eight referenced DLLs. Put them in that directory or pass -SdkDirectory. The references use Private=false so the host supplies them at runtime.
+- A matching OBMP client SDK. See ../Dependencies/Client/README.md for the eight referenced DLLs. Put them in that directory (`./GET-DEPENDENCIES.ps1 <server release URL, zip or folder>` does this) or pass -SdkDirectory. The references use Private=false so the host supplies them at runtime.
 - Unreal Engine **5.3.2** for native assets. The build checks the exact major/minor/patch version.
 - Visual Studio C++ build tools with MSVC **14.38.33130** (the build script selects this version) and Windows SDK **10.0.22621.0**, matching the original project build environment.
 - retoc **0.1.5** for legacy pak to IoStore conversion. See ../Tools/retoc/README.md. Supply any local compression/runtime prerequisites required by the tool; do not upload engine DLLs to this repository.
